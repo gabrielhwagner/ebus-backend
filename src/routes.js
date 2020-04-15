@@ -1,22 +1,15 @@
 const express = require('express');
-const connection = require('./database/connection');
+
+const ItineraryController = require('./controllers/ItineraryController');
+const PassengerController = require('./controllers/PassengerController');
 
 const routes = express.Router();
 
-routes.get('/', async (req, res) => {
-   const itinerary = await connection('itinerary').select('*');
+// Itinerary
+routes.get('/itinerary', ItineraryController.listItinerariesDay);
+routes.get('/itinerary/:id/passenger', ItineraryController.listPassengerDay)
 
-  return res.json(itinerary);
-});
-
-routes.post('/', async (req, res) => {
-  const { name } = req.body;
-
-  await connection('itinerary').insert({
-    name
-  });
-
-  return res.json();
-});
+// Passenger
+routes.get('/passenger/itinerary', PassengerController.listItinerariesDay)
 
 module.exports = routes;

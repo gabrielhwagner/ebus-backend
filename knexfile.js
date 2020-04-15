@@ -2,47 +2,23 @@
 
 module.exports = {
 
+  developmentLocal: {
+    client: 'mysql2',
+    connection: {
+      host: 'localhost',
+      user: 'root',
+      password: 'password',
+      database: 'mydb'
+    }
+  },
+
   development: {
-    client: 'sqlite3',
+    client: 'mysql2',
     connection: {
-      filename: './src/database/db.sqlite'
-    },
-    migrations: {
-      directory: './src/database/migrations'
-    },
-    useNullAsDefault: true
-  },
-
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
+      host: 'us-cdbr-iron-east-01.cleardb.net',
+      user: 'b2a5627f8a09f1',
+      password: '2ccc2083',
+      database: 'heroku_478adca6f832bfb'
     }
   },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
-
 };
