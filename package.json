@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "NODE_ENV=local nodemon src/index.js",
+    "dev:test": "NODE_ENV=test nodemon src/index.js",
     "start": "node src/index.js"
   },
   "keywords": [],
@@ -12,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.20.13",
     "mysql2": "^2.1.0"

@@ -1,8 +1,15 @@
 const express = require('express');
+if(process.env.NODE_ENV){
+  require('dotenv').config({  
+    path: process.env.NODE_ENV === "local" ? ".env.local" : ".env"
+  })
+}
+
 const routes = require('./routes');
 const cors = require('cors');
 
 const app = express();
+
 
 app.use(cors());
 app.use(express.json());
