@@ -44,3 +44,19 @@ ip.itinerario_id in (
 	where dia_has_itinerario.dia_id = 2
 )
 group by ip.itinerario_id;
+
+/* itinerario ativo */
+select ii.ativo, it.turno, it.descricao
+from itinerario_iniciado as ii
+inner join itinerario as it
+on ii.itinerario_id = it.id
+where ii.itinerario_id = 1 AND
+ii.dia_id = 2 AND
+ii.data BETWEEN '2020-04-14 00:00:00'
+AND '2020-04-14 23:59:00';
+
+/* localizacao motorista */
+select lm.latitude, lm.longitude
+from localizacao_motorista as lm
+where lm.itinerario_iniciado_id = 3
+order by lm.id desc limit 1;
