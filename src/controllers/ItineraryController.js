@@ -80,10 +80,11 @@ module.exports = {
   },
 
   async searchLocationDriver(req, res) {
-    const { day } = req.query;
-    const { id } = req.params;
-    const dayFormat = Utils.converteDateInNumber(day);
     try {
+      const { day } = req.query;
+      const { id } = req.params;
+      const dayFormat = Utils.converteDateInNumber(day);
+
       const itineraryStart = await connection('itinerario_iniciado as ii')
         .select('ii.id')
         .where('ii.itinerario_id', id)
@@ -94,7 +95,7 @@ module.exports = {
         )
         .orderBy('ii.id', 'desc')
         .limit(1);
-  
+
       const data = await connection('localizacao_motorista as lm')
         .select('lm.latitude', 'lm.longitude')
         .where('lm.itinerario_iniciado_id', itineraryStart[0].id)
