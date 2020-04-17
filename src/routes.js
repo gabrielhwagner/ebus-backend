@@ -2,8 +2,12 @@ const express = require('express');
 
 const ItineraryController = require('./controllers/ItineraryController');
 const PassengerController = require('./controllers/PassengerController');
+const AuthController = require('./controllers/AuthController');
 
 const routes = express.Router();
+
+//
+routes.post('/auth', AuthController.login);
 
 // Itinerary
 routes.get('/itinerary', ItineraryController.listItinerariesDay);
