@@ -52,7 +52,7 @@ module.exports = {
         }
       );
 
-      return res.json({token});
+      return res.json({user: data[0].nome, token});
   
     } catch (err) {
       res.status(err.response.status)
