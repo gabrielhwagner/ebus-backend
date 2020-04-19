@@ -5,18 +5,18 @@ module.exports = {
   async listItinerariesDay(req, res) {
     try {
       const { day } = req.query;
-      const { authorization } = req.headers;
+      const { id } = req.user;
       const dayFormat = Utils.converteDateInNumber(day);
       
       const itineraries = await connection('itinerario_has_passageiro as ip')
         .select('ip.itinerario_id', 'it.turno', 'it.descricao')
         .innerJoin('itinerario as it', 'it.id', 'ip.itinerario_id')
-        .where('ip.passageiro_id', authorization)
+        .where('ip.passageiro_id', id)
         .whereNotIn('ip.itinerario_id',
           connection('ausencia_passageiro as ap')
             .select('ap.itinerario_id')
             .where('ap.data', day)
-            .andWhere('ap.passageiro_id', authorization)
+            .andWhere('ap.passageiro_id', id)
         )
         .whereIn('ip.itinerario_id',
           connection('dia_has_itinerario as di')

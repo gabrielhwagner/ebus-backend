@@ -4,7 +4,6 @@ if(process.env.NODE_ENV){
     path: process.env.NODE_ENV === "local" ? ".env.local" : ".env"
   })
 }
-
 const routes = require('./routes');
 const cors = require('cors');
 
