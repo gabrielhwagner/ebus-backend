@@ -43,7 +43,7 @@ module.exports = {
           turno: it.turno,
           descricao: it.descricao,
           horarioInicio: it.horarioInicio,
-          ativo: active.length > 0 ? active[0].status : 'NAO_INICIADO',  
+          status: active.length > 0 ? active[0].status : 'NAO_INICIADO',  
         }
       });
         
