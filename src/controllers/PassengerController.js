@@ -9,7 +9,7 @@ module.exports = {
       const dayFormat = Utils.converteDateInNumber(day);
       
       const itineraries = await connection('itinerario_has_passageiro as ip')
-        .select('ip.itinerario_id', 'it.turno', 'it.descricao')
+        .select('ip.itinerario_id', 'it.turno', 'it.descricao', 'it.horarioInicio')
         .innerJoin('itinerario as it', 'it.id', 'ip.itinerario_id')
         .where('ip.passageiro_id', id)
         .whereNotIn('ip.itinerario_id',
@@ -42,6 +42,7 @@ module.exports = {
           id: it.itinerario_id,
           turno: it.turno,
           descricao: it.descricao,
+          horarioInicio: it.horarioInicio,
           ativo: active.length > 0 ? active[0].status : 'NAO_INICIADO',  
         }
       });
