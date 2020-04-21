@@ -29,15 +29,15 @@ module.exports = {
       } else if (user.length === 0) {
         if (equal.length > 0) {
           await connection('indicador_notificacao as in')
-            .where('in.app_id', playerId)
-            .del();
+            .update({usuario_id: userId})
+            .where({ app_id: playerId });
+        } else {
+          await connection('indicador_notificacao')
+            .insert({
+              app_id: playerId,
+              usuario_id: userId,
+            });
         }
-
-        await connection('indicador_notificacao')
-          .insert({
-            app_id: playerId,
-            usuario_id: userId,
-          });
       }
 
       
