@@ -28,6 +28,6 @@ routes.post('/go/:idStart/location', AuthController.verifyJWT, GoController.save
 routes.post('/go/:idStart/passenger/:id', AuthController.verifyJWT, GoController.saveStorePassenger);
 
 // User
-routes.post('/user/app', AuthController.verifyJWT, UserController.saveAppId)
+routes.post('/user/app', AuthController.verifyJWT, UserController.savePlayerId)
 
 module.exports = routes;
