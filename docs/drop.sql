@@ -1,0 +1,13 @@
+drop table ausencia_passageiro;
+drop table dia;
+drop table dia_has_itinerario;
+drop table endereco;
+drop table historico_passageiro;
+drop table instituicao;
+drop table itinerario;
+drop table itinerario_has_passageiro;
+drop table itinerario_iniciado;
+drop table localizacao_motorista;
+drop table motorista;
+drop table passageiro;
+drop table usuario;
