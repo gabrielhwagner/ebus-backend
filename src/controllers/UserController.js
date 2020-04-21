@@ -6,7 +6,6 @@ module.exports = {
     try {
       const { userId } = req.user;
       const { playerId } = req.body;
-
       const user = await connection('indicador_notificacao as in')
         .select('*')
         .where('in.usuario_id', userId);
@@ -16,12 +15,12 @@ module.exports = {
         .where('in.app_id', playerId);
       
       if (user.length === 1 && user[0].app_id !== playerId) {
-        if (equal.length > 0) {
-          await connection('indicador_notificacao as in')
-            .where('in.app_id', playerId)
-            .del();
-        }
-
+        // console.log('delete',equal);
+        // if (equal.length > 0) {
+        //   await connection('indicador_notificacao as in')
+        //     .where('in.app_id', playerId)
+        //     .del();
+        // }
         await connection('indicador_notificacao')
           .update({ app_id: playerId})
           .where({ usuario_id: userId });
