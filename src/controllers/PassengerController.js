@@ -1,5 +1,8 @@
+const dayjs = require('dayjs');
+
 const connection = require('../database/connection');
 const Utils = require('../utils/utils');
+const OneSignalService = require('../services/OneSignalService');
 
 module.exports = {
   async listItinerariesDay(req, res) {
@@ -50,6 +53,42 @@ module.exports = {
       const retorno = await Promise.all(data);
   
       return res.json(retorno);
+    } catch (err) {
+      res.status(err.response.status)
+        .json(err.response.data);
+    }
+  },
+
+  async sendNotification(req, res) {
+    try {
+      const { id } = req.params;
+      const { title, description } = req.body;
+
+      const dateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      
+      const userId = await connection('passageiro as pa')
+        .select('pa.usuario_id')
+        .where('pa.id', id);
+      
+     
+      await connection('notificacao')
+        .insert({
+          titulo: title,
+          descricao: description,
+          usuario_id: userId[0].usuario_id,
+          data: dateTime,
+          status: 'NOVO',
+        });
+      
+      const playerId = await connection('indicador_notificacao as in')
+        .select('in.app_id')
+        .where('in.usuario_id', userId[0].usuario_id);
+
+      if(playerId.length === 1) {
+        await OneSignalService.pushUser(playerId[0].app_id, title, description);
+      }
+
+      return res.sendStatus(201);
     } catch (err) {
       res.status(err.response.status)
         .json(err.response.data);

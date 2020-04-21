@@ -1,10 +1,10 @@
 /* itinerarios de um dia */
 select itinerario.*, dia.dia from itinerario
-inner join dia_has_itinerario
-on dia_has_itinerario.itinerario_id = itinerario.id
+inner join dia_has_itinerario as di
+on di.itinerario_id = itinerario.id
 inner join dia
-on dia.dia = dia_has_itinerario.dia_id
-where dia.dia = 'SEG';
+on dia.id = di.dia_id
+where dia.id = 2;
 
 /* id passageiros de um itinerario */
 select ip.passageiro_id from itinerario_has_passageiro as ip
