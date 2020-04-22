@@ -8,7 +8,7 @@ const UserController = require('./controllers/UserController');
 
 const routes = express.Router();
 
-//
+// auth
 routes.post('/auth', AuthController.login);
 
 // Itinerary

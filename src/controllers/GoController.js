@@ -30,8 +30,7 @@ module.exports = {
   async saveLocationDriver(req, res) {
     try {
       const { idStart } = req.params;
-      const { latitude, longitude } = req.body;
-      const data = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      const { latitude, longitude, data } = req.body;
 
       await connection('localizacao_motorista')
         .insert({
@@ -51,14 +50,12 @@ module.exports = {
   async saveStorePassenger(req, res) {
     try {
       const { idStart, id } = req.params;
-      const { status } = req.body;
-
-      const dateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
+      const { status, data } = req.body;
 
       await connection('historico_passageiro')
         .insert({
           status,
-          data: dateTime,
+          data,
           passageiro_id: id,
           itinerario_iniciado_id: idStart,
         })
@@ -75,13 +72,13 @@ module.exports = {
       const { id } = req.params;
       const { data } = req.body;
 
-      const dateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
-      const dayFormat = Utils.converteDateInNumber(data);
+      const date = dayjs(data).format('YYYY-MM-DD');
+      const dayFormat = Utils.converteDateInNumber(date);
 
       await connection('itinerario_iniciado')
         .insert({
           status: 'CONCLUIDO',
-          data: dateTime,
+          data,
           itinerario_id: id,
           dia_id: dayFormat
         })
