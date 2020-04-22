@@ -10,13 +10,13 @@ module.exports = {
       const { id } = req.params;
       const { data } = req.body;
       
-      const dateTime = dayjs().format('YYYY-MM-DD HH:mm:ss');
-      const dayFormat = Utils.converteDateInNumber(data);
+      const date = dayjs(data).format('YYYY-MM-DD');
+      const dayFormat = Utils.converteDateInNumber(date);
       
       await connection('itinerario_iniciado')
       .insert({
         status: 'ATIVO',
-        data: dateTime,
+        data: data,
         itinerario_id: id,
         dia_id: dayFormat
       })
