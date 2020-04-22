@@ -13,15 +13,14 @@ module.exports = {
       const date = dayjs(data).format('YYYY-MM-DD');
       const dayFormat = Utils.converteDateInNumber(date);
       
-      await connection('itinerario_iniciado')
-      .insert({
-        status: 'ATIVO',
-        data: data,
-        itinerario_id: id,
-        dia_id: dayFormat
-      })
-      
-      return res.sendStatus(200);
+      const startItinerary = await connection('itinerario_iniciado')
+        .insert({
+          status: 'ATIVO',
+          data: data,
+          itinerario_id: id,
+          dia_id: dayFormat
+        })
+      return res.json({startItinerary: startItinerary[0]});
     } catch (err) {
       res.status(err.response.status)
       .json(err.response.data);
