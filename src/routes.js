@@ -13,12 +13,13 @@ routes.post('/auth', AuthController.login);
 
 // Itinerary
 routes.get('/itinerary', AuthController.verifyJWT, ItineraryController.listItinerariesDay);
-routes.get('/itinerary/:id/passenger', AuthController.verifyJWT, ItineraryController.listPassengerDay)
-routes.get('/itinerary/:id/location', AuthController.verifyJWT, ItineraryController.searchLocationDriver)
+routes.get('/itinerary/:id/passenger', AuthController.verifyJWT, ItineraryController.listPassengerDay);
+routes.get('/itinerary/:id/location', AuthController.verifyJWT, ItineraryController.searchLocationDriver);
 routes.get('/itinerary/:id/points', AuthController.verifyJWT, ItineraryController.findPointsItinerary);
+routes.post('/itinerary/:id/passenger/:idPassenger/remove', AuthController.verifyJWT, ItineraryController.removePassenger);
 
 // Passenger
-routes.get('/passenger/itinerary', AuthController.verifyJWT, PassengerController.listItinerariesDay)
+routes.get('/passenger/itinerary', AuthController.verifyJWT, PassengerController.listItinerariesDay);
 routes.post('/passenger/:id/notification', AuthController.verifyJWT, PassengerController.sendNotification);
 
 // GO
