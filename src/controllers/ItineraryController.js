@@ -198,5 +198,26 @@ module.exports = {
       res.status(err.response.status)
         .json(err.response.data);
     }
+  },
+
+  async removePassengerOfPassenger(req, res) {
+    try {
+      const { id } = req.params;
+      const { data, author } = req.body;
+      
+      await connection('ausencia_passageiro')
+        .insert({
+          autor: author,
+          data: data,
+          itinerario_id: id,
+          passageiro_id: req.user.id
+        });
+
+      return res.sendStatus(201);
+
+    } catch (err) {
+      res.status(err.response.status)
+        .json(err.response.data);
+    }
   }
 }

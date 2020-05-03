@@ -21,6 +21,8 @@ routes.post('/itinerary/:id/passenger/:idPassenger/remove', AuthController.verif
 // Passenger
 routes.get('/passenger/itinerary', AuthController.verifyJWT, PassengerController.listItinerariesDay);
 routes.post('/passenger/:id/notification', AuthController.verifyJWT, PassengerController.sendNotification);
+routes.post('/passenger/itinerary/:id/remove', AuthController.verifyJWT, ItineraryController.removePassengerOfPassenger);
+
 
 // GO
 routes.post('/go/:id/start', AuthController.verifyJWT, GoController.startItinerary);
