@@ -24,6 +24,8 @@ module.exports = {
         return 'SEX';
       case 6:
         return 'SAB';
+      case 7: 
+        return 'DOM'
     }
   }
 }
